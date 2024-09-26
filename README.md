@@ -1,5 +1,5 @@
 # EpsiloN-Lang
-数学記述言語（アイデア）
+数学記述言語（アイデア）  
 公理系からなるCoreクレートと、基本の定理の集合のStdクレートが標準ライブラリとして提供される  
 どちらとも独自のものに置き換えることができ、さまざまな論理体系の記述が可能  
 公理系に矛盾がある場合、未定義動作となる  
@@ -34,10 +34,12 @@ impl theorem for a {
     let alpha = 0;
     prop epsilon_n(self) -> { abs(self(n) - alpha) < epsilon } {
         use Self::*;
-        src src core::archimedes::prop1::prop(n_0, epsilon, 1) & src N < n { 1/n < 1/N } & src n: N {0 < 1/n} {
-            abs(self(n) - alpha) = abs(self(n)) = self(n) = 1/n < 1/N < epsilon
-        } {
-            abs(self(n) - alpha) < epsilon
+        let a = core::archimedes::prop1::prop(n_0, epsilon, 1);
+        let b = src a & src N < n { 1/n < 1/N } & src { self(n) = 1/n } {
+            self(n) = 1/n < epsilon
+        };
+        src b & src n: N {0 < 1/n} {
+            abs(self(n) - alpha) = self(n) < epsilon
         }
     }
 }
