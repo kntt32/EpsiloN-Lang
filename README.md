@@ -30,7 +30,7 @@ fn a(n: N) -> R {
 }
 
 //定理証明
-impl theorem for a {
+impl limit_numseq for a {
     let alpha = 0;
     prop epsilon_n(self) -> { abs(self(n) - alpha) < epsilon } {
         use Self::*;
